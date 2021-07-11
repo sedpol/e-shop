@@ -1,11 +1,10 @@
-import React,{useState} from 'react'
+import React,{useState} from 'react';
+import { Product } from '../../Services/ProductService';
+import  './ProductBox.css';
 
-export interface color {
-    name:string
-    hexCode:string
-}
-export default function Product(props:{availableColors:Array<color>}) {
-    const [borderColor, setBorderColor] = useState(props.availableColors[0].hexCode)
+
+export default function ProductBox(props:{product:Product}) {
+    const [borderColor, setBorderColor] = useState(props.product.availableColors[0].hexCode)
     const changeBorderColor =(event:React.MouseEvent<HTMLButtonElement, MouseEvent>, color:string)=>{
         setBorderColor(color)
     }
@@ -18,7 +17,7 @@ export default function Product(props:{availableColors:Array<color>}) {
             </div>
             <div className='color-button-group'>
                 {
-                    props.availableColors.map(color=>
+                    props.product.availableColors.map(color=>
                         <button key={color.hexCode} onClick={(event)=>changeBorderColor(event, color.hexCode)}>{color.name}</button>
                     )
                 }
